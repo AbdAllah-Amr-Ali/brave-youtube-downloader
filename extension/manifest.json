@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "Brave YouTube yt-dlp Downloader",
+  "version": "1.0.0",
+  "description": "Download YouTube videos directly with local yt-dlp in any resolution (144p to 1080p+, MP3 audio).",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvkrkpQYJtZV8VJ1j850AsxYRfrvFZXoOOGgcqADkAyaXc/GUtNnV68pEEASuG4ufg+taL6Gdkhd0whiTVHQWDw/iOrlWlZIzcwbO3AsIiErFADGVBK4sVAz3V+GNw28lCch4ViBVlXl1fedIwfq9KWEivuVUwU6q4SQIRb1+LNZWGjAh9+t6AE2vO6FR/OJsHzeGithXonrkI3s9bhKJ1r1z4KGK0kB/A229XzSUII0c4ZSxXcHcV19npA3Py2agbe8VjkNmLJkHU1exAl7Mm2PkDwd8/GYCLFAE0KH+38jLqYeZQZ+16xrqvwcbX4z89e6O13xeb+OtemwldvaJBwIDAQAB",
+  "permissions": [
+    "nativeMessaging",
+    "storage",
+    "notifications"
+  ],
+  "host_permissions": [
+    "*://*.youtube.com/*"
+  ],
+  "background": {
+    "service_worker": "background/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["content/content.js"],
+      "css": ["content/content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "yt-dlp Downloader Settings",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

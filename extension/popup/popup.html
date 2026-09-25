@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brave yt-dlp Downloader</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <img src="../icons/icon48.png" alt="Logo" class="logo">
+    <div class="header-info">
+      <h1>yt-dlp Downloader</h1>
+      <span class="version">v1.0.0</span>
+    </div>
+  </div>
+
+  <div class="card status-card">
+    <div class="card-title">Host Connection</div>
+    <div class="status-row">
+      <span class="indicator" id="status-indicator"></span>
+      <span id="status-text">Checking native host...</span>
+    </div>
+    <div class="tool-details" id="tool-details" style="display: none;">
+      <div class="detail-item"><strong>yt-dlp:</strong> <span id="ytdlp-version">...</span></div>
+      <div class="detail-item"><strong>ffmpeg:</strong> <span id="ffmpeg-version">...</span></div>
+    </div>
+    <button id="btn-test-conn" class="btn btn-secondary">Test Connection</button>
+  </div>
+
+  <div class="card settings-card">
+    <div class="card-title">Preferences</div>
+
+    <div class="form-group">
+      <label for="default-quality">Default Resolution</label>
+      <select id="default-quality" class="form-control">
+        <option value="best">🎬 Best Video (Max Quality)</option>
+        <option value="1080p">🎬 1080p Full HD</option>
+        <option value="720p">🎬 720p HD</option>
+        <option value="480p">🎬 480p Standard</option>
+        <option value="360p">🎬 360p Low</option>
+        <option value="240p">🎬 240p Very Low</option>
+        <option value="144p">🎬 144p Minimum</option>
+        <option value="audio_mp3">🎵 Audio Only (MP3)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="download-dir">Download Folder</label>
+      <input type="text" id="download-dir" class="form-control" placeholder="C:\Users\...\Downloads\YouTube">
+      <span class="form-hint">Leave blank to use default Windows Downloads\YouTube</span>
+    </div>
+
+    <div class="form-group checkbox-group">
+      <label class="checkbox-container">
+        <input type="checkbox" id="always-ask-folder" checked>
+        <span class="checkmark"></span>
+        Always ask where to save download
+      </label>
+    </div>
+
+    <div class="form-group checkbox-group">
+      <label class="checkbox-container">
+        <input type="checkbox" id="show-notifications" checked>
+        <span class="checkmark"></span>
+        Show Desktop Notifications
+      </label>
+    </div>
+
+    <button id="btn-save" class="btn btn-primary">Save Preferences</button>
+    <div id="save-feedback" class="save-feedback"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

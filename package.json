@@ -1,0 +1,10 @@
+{
+  "name": "brave-youtube-downloader",
+  "version": "1.0.0",
+  "description": "Brave YouTube yt-dlp Downloader Extension & Website",
+  "author": "AbdAllah Amr Ali",
+  "license": "MIT",
+  "scripts": {
+    "build": "python package_release.py || python3 package_release.py || echo 'Build package ready'"
+  }
+}

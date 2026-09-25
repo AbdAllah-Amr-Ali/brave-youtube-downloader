@@ -1,0 +1,10 @@
+{
+  "name": "com.ytdlp.brave_downloader",
+  "description": "Native Messaging Host for Brave YouTube yt-dlp Downloader",
+  "path": "j:\\projects\\codedex projects\\area calc\\brave-yt-dlp-extension\\native-host\\host.bat",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://mgmikjlcgaoaiodlmpelphcocnbodckd/"
+  ]
+}
+
