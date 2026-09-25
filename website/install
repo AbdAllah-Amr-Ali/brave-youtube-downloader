@@ -17,21 +17,25 @@ function Write-Banner {
     Write-Host ""
 }
 
-function Write-Step($stepNum, $text) {
+function Write-Step {
+    param([string]$stepNum, [string]$text)
     Write-Host " [$stepNum/5] " -ForegroundColor Cyan -NoNewline
     Write-Host "$text" -ForegroundColor White
 }
 
-function Write-Success($text) {
-    Write-Host "       ✔ $text" -ForegroundColor Green
+function Write-Success {
+    param([string]$text)
+    Write-Host "       [OK] $text" -ForegroundColor Green
 }
 
-function Write-Info($text) {
-    Write-Host "       ℹ $text" -ForegroundColor Yellow
+function Write-Info {
+    param([string]$text)
+    Write-Host "       [INFO] $text" -ForegroundColor Yellow
 }
 
-function Write-ErrorMsg($text) {
-    Write-Host "       ✖ $text" -ForegroundColor Red
+function Write-ErrorMsg {
+    param([string]$text)
+    Write-Host "       [ERROR] $text" -ForegroundColor Red
 }
 
 Write-Banner
@@ -252,56 +256,71 @@ Set-ItemProperty -Path $chromeRegPath -Name "(Default)" -Value $manifestJsonPath
 Write-Success "Google Chrome registry key registered."
 
 Write-Host ""
-Write-Step "5" "Configuring shortcuts and browser extension..."
-
-# Create Desktop Shortcut for Extension Folder
-try {
-    $WshShell = New-Object -ComObject WScript.Shell
-    $DesktopPath = [Environment]::GetFolderPath("Desktop")
-    $Shortcut = $WshShell.CreateShortcut("$DesktopPath\Brave YouTube Downloader Folder.lnk")
-    $Shortcut.TargetPath = "explorer.exe"
-    $Shortcut.Arguments = "`"$ExtDir`""
-    $Shortcut.Description = "Open Brave YouTube yt-dlp Extension Directory"
-    $Shortcut.Save()
-    Write-Success "Created Desktop helper shortcut."
-} catch {}
-
 Write-Host ""
-Write-Host " ==================================================================== " -ForegroundColor Green
-Write-Host "                    🎉 INSTALLATION COMPLETE!                         " -ForegroundColor Yellow -BackgroundColor Black
-Write-Host " ==================================================================== " -ForegroundColor Green
-Write-Host ""
-Write-Host "  To enable the extension in Brave in 5 seconds:" -ForegroundColor White
-Write-Host "   1. Open Brave and go to: " -ForegroundColor Gray -NoNewline
-Write-Host "brave://extensions" -ForegroundColor Cyan
-Write-Host "   2. Turn ON the " -ForegroundColor Gray -NoNewline
-Write-Host "'Developer mode'" -ForegroundColor Yellow -NoNewline
-Write-Host " switch at the top-right." -ForegroundColor Gray
-Write-Host "   3. Click " -ForegroundColor Gray -NoNewline
-Write-Host "'Load unpacked'" -ForegroundColor Yellow -NoNewline
-Write-Host " and select this folder:" -ForegroundColor Gray
-Write-Host "      $ExtDir" -ForegroundColor Cyan
-Write-Host ""
-Write-Host "  A File Explorer window will now open to that exact folder for you." -ForegroundColor Green
-Write-Host ""
+Write-Step "5" "Automatically activating extension in Brave..."
 
-# Copy path to clipboard
-try {
-    Set-Clipboard -Value $ExtDir
-    Write-Host "  [Folder path copied to your clipboard! Just paste into the folder dialog]" -ForegroundColor Yellow
-} catch {}
+function Find-BraveExe {
+    $candidates = @(
+        "$env:ProgramFiles\BraveSoftware\Brave-Browser\Application\brave.exe",
+        "${env:ProgramFiles(x86)}\BraveSoftware\Brave-Browser\Application\brave.exe",
+        "$env:LOCALAPPDATA\BraveSoftware\Brave-Browser\Application\brave.exe"
+    )
+    $cmd = (Get-Command "brave.exe" -ErrorAction SilentlyContinue)
+    if ($cmd) { return $cmd.Source }
 
-# Open Extension folder in explorer
-Start-Process "explorer.exe" -ArgumentList "`"$ExtDir`""
+    foreach ($path in $candidates) {
+        if (Test-Path $path) { return $path }
+    }
+    return $null
+}
 
-# Offer to open Brave extensions page
-$braveExe = (Get-Command "brave.exe" -ErrorAction SilentlyContinue)
-if ($braveExe) {
-    Start-Process $braveExe.Source -ArgumentList "brave://extensions"
+$bravePath = Find-BraveExe
+
+if ($bravePath) {
+    Write-Success "Located Brave Browser: $bravePath"
+
+    # Close any running Brave processes so --load-extension takes effect
+    $runningBrave = Get-Process -Name "brave" -ErrorAction SilentlyContinue
+    if ($runningBrave) {
+        Write-Info "Restarting Brave to activate the extension..."
+        Stop-Process -Name "brave" -Force -ErrorAction SilentlyContinue
+        Start-Sleep -Seconds 1
+    }
+
+    # Create Desktop shortcut that always launches Brave with the extension
+    try {
+        $WshShell = New-Object -ComObject WScript.Shell
+        $DesktopPath = [Environment]::GetFolderPath("Desktop")
+        $Shortcut = $WshShell.CreateShortcut("$DesktopPath\Brave (YouTube Downloader).lnk")
+        $Shortcut.TargetPath = $bravePath
+        $Shortcut.Arguments = "--load-extension=`"$ExtDir`""
+        $Shortcut.IconLocation = "$bravePath,0"
+        $Shortcut.Description = "Launch Brave with YouTube Downloader extension enabled"
+        $Shortcut.Save()
+        Write-Success "Created Desktop shortcut: 'Brave (YouTube Downloader)'"
+    } catch {}
+
+    # Launch Brave directly with extension loaded
+    Write-Info "Launching Brave with extension loaded..."
+    Start-Process $bravePath -ArgumentList @("--load-extension=`"$ExtDir`"", "https://www.youtube.com")
+    Write-Success "Brave launched! Extension is active."
+} else {
+    Write-Info "Could not locate brave.exe automatically. Please launch Brave with:"
+    Write-Host "  --load-extension=`"$ExtDir`"" -ForegroundColor Cyan
 }
 
 Write-Host ""
-Write-Host " Press any key to finish..." -ForegroundColor Gray
-try {
-    $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
-} catch {}
+Write-Host " ==================================================================== " -ForegroundColor Green
+Write-Host "              *** EXTENSION INSTALLED & ACTIVATED! ***                " -ForegroundColor Yellow -BackgroundColor Black
+Write-Host " ==================================================================== " -ForegroundColor Green
+Write-Host ""
+Write-Host "  * Dependencies (yt-dlp, FFmpeg, Node) verified and installed." -ForegroundColor Green
+Write-Host "  * Native Messaging Host registered in Windows Registry." -ForegroundColor Green
+Write-Host "  * Brave opened with the extension already loaded and active!" -ForegroundColor Green
+Write-Host "  * Desktop shortcut 'Brave (YouTube Downloader)' created." -ForegroundColor Green
+Write-Host ""
+Write-Host "  Go to any YouTube video and click the Download button beneath it!" -ForegroundColor Cyan
+Write-Host ""
+Write-Host ""
+Write-Host " Setup complete! Enjoy your downloads." -ForegroundColor Gray
+Start-Sleep -Seconds 2

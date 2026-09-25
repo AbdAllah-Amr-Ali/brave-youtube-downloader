@@ -24,12 +24,17 @@ if (Test-Path $chromeReg) {
     Write-Host "  ✔ Google Chrome registry key removed." -ForegroundColor Green
 }
 
-Write-Host " Removing desktop shortcut..." -ForegroundColor Cyan
+Write-Host " Removing desktop shortcuts..." -ForegroundColor Cyan
 $DesktopPath = [Environment]::GetFolderPath("Desktop")
-$ShortcutPath = "$DesktopPath\Brave YouTube Downloader Folder.lnk"
-if (Test-Path $ShortcutPath) {
-    Remove-Item -Path $ShortcutPath -Force -ErrorAction SilentlyContinue
-    Write-Host "  ✔ Desktop shortcut removed." -ForegroundColor Green
+$Shortcut1 = "$DesktopPath\Brave (YouTube Downloader).lnk"
+$Shortcut2 = "$DesktopPath\Brave YouTube Downloader Folder.lnk"
+if (Test-Path $Shortcut1) {
+    Remove-Item -Path $Shortcut1 -Force -ErrorAction SilentlyContinue
+    Write-Host "  ✔ 'Brave (YouTube Downloader)' shortcut removed." -ForegroundColor Green
+}
+if (Test-Path $Shortcut2) {
+    Remove-Item -Path $Shortcut2 -Force -ErrorAction SilentlyContinue
+    Write-Host "  ✔ Extension folder shortcut removed." -ForegroundColor Green
 }
 
 Write-Host " Terminating any active background host processes..." -ForegroundColor Cyan
