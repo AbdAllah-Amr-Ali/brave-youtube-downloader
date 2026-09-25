@@ -1,5 +1,7 @@
 # Brave YouTube Downloader (yt-dlp Native Extension)
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FAbdAllah-Amr-Ali%2Fbrave-youtube-downloader)
+
 A high-performance, 100% local hardware browser extension for **Brave** (and Chromium browsers) that injects a native-styled download button directly beneath YouTube videos. Powered by your computer's local `yt-dlp` and `FFmpeg` engines.
 
 ---
