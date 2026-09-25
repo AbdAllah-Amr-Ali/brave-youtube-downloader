@@ -361,10 +361,35 @@ a {
   fill: currentColor;
 }
 
+.cta-sub-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 10px;
+}
+
+.dot-separator {
+  color: var(--border-color-hover);
+}
+
+.zip-alt-link {
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+.zip-alt-link:hover {
+  color: #ffffff;
+}
+
 /* Quick Terminal Card */
 .quick-terminal-card {
   width: 100%;
-  max-width: 540px;
+  max-width: 580px;
   background: rgba(18, 20, 26, 0.9);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
@@ -376,10 +401,16 @@ a {
 .terminal-header {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
+  justify-content: space-between;
+  padding: 6px 14px;
   background: rgba(255, 255, 255, 0.03);
   border-bottom: 1px solid var(--border-color);
+}
+
+.terminal-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .terminal-dot {
@@ -392,20 +423,42 @@ a {
 .terminal-dot.yellow { background-color: #ffbd2e; }
 .terminal-dot.green { background-color: #27c93f; }
 
-.terminal-title {
-  font-size: 11px;
+.terminal-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.term-tab {
+  background: transparent;
+  border: none;
   color: var(--text-muted);
-  margin-left: 6px;
+  font-size: 11px;
+  font-family: var(--font-body);
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.term-tab:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.term-tab.active {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.25);
 }
 
 .terminal-body {
-  padding: 10px 14px;
+  padding: 12px 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
 }
 
 .terminal-body code {

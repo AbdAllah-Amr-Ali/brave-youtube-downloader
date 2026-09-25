@@ -24,22 +24,35 @@ A high-performance, 100% local hardware browser extension for **Brave** (and Chr
 - 🛡️ **Anti-403 Protection**: Built-in JS runtime integration (`node.exe`) solves YouTube's n-sig cipher challenge without 403 Forbidden errors.
 - 🔒 **Total Privacy**: Zero analytics, zero logging, zero telemetry.
 
+## ⚡ Instant Installation (Choose Any Method)
+
+### Method 1: Instant One-Line Command (No files to download, No extraction)
+Paste into **Windows PowerShell** or **Windows Terminal**:
+```powershell
+irm https://raw.githubusercontent.com/AbdAllah-Amr-Ali/brave-youtube-downloader/main/install.ps1 | iex
+```
+*Or from Command Prompt / Run Dialog (`Win + R`):*
+```cmd
+powershell -c "irm https://raw.githubusercontent.com/AbdAllah-Amr-Ali/brave-youtube-downloader/main/install.ps1 | iex"
+```
+
+### Method 2: 1-Click `.bat` Installer (No ZIP extraction)
+1. Download **[`Install-Brave-Downloader.bat`](https://raw.githubusercontent.com/AbdAllah-Amr-Ali/brave-youtube-downloader/main/install.bat)**.
+2. Double-click it. It automatically downloads the latest package, installs `yt-dlp`, `FFmpeg`, standalone `Node.js`, configures registry keys, and opens Brave!
+
+### Method 3: Full Setup ZIP Bundle
+1. Download `Brave-YouTube-Downloader-Setup.zip`.
+2. Extract and run `Install.bat`.
+
 ---
 
-## 1-Click Automated Installation
-
-We provide an all-in-one automated installer that sets up everything in seconds:
-
-1. Double-click **`Install.bat`** (or run `installer\Install.bat`).
-2. The installer will automatically:
-   - Check if `yt-dlp.exe` is installed (and auto-download it from GitHub if missing).
-   - Check if `ffmpeg.exe` is installed (and auto-download or guide if missing).
-   - Check if standalone `node.exe` is present (for YouTube cipher solving).
-   - Deploy extension and native host to `%LOCALAPPDATA%\BraveYtDlpExtension`.
-   - Register Brave and Google Chrome Windows Registry keys.
-   - Automatically open the extension folder and navigate to `brave://extensions`.
-3. In Brave, turn ON **Developer mode** (top right) and click **Load unpacked** (select the opened folder).
-4. Done!
+### What the Automated Installer Does:
+- Auto-detects or downloads official **`yt-dlp.exe`** to `%LOCALAPPDATA%\BraveYtDlpExtension\bin\`.
+- Auto-detects or downloads **`ffmpeg.exe`** and **`ffprobe.exe`**.
+- Auto-downloads standalone **`node.exe`** for anti-403 deciphering.
+- Generates Native Messaging Host manifests and registers Windows Registry keys for **Brave** and **Chrome**.
+- Automatically copies the extension directory path to your clipboard and opens `brave://extensions`.
+- In Brave, turn ON **Developer mode** and click **Load unpacked** (paste the clipboard path). Done!
 
 ---
 

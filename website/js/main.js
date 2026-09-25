@@ -18,6 +18,19 @@ function setupCopyButtons() {
   const copyCmdBtn = document.getElementById("copyCmdBtn");
   const copyFeedback = document.getElementById("copyFeedback");
   const installCommand = document.getElementById("installCommand");
+  const termTabs = document.querySelectorAll(".term-tab");
+
+  // Tab switching
+  termTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      termTabs.forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
+      const cmd = tab.getAttribute("data-cmd");
+      if (cmd && installCommand) {
+        installCommand.textContent = cmd;
+      }
+    });
+  });
 
   if (copyCmdBtn && installCommand) {
     copyCmdBtn.addEventListener("click", () => {

@@ -2,6 +2,11 @@
   "version": 2,
   "outputDirectory": "website",
   "cleanUrls": true,
+  "rewrites": [
+    { "source": "/install", "destination": "/install.ps1" },
+    { "source": "/install.ps1", "destination": "/install.ps1" },
+    { "source": "/install.bat", "destination": "/install.bat" }
+  ],
   "headers": [
     {
       "source": "/downloads/(.*)",
@@ -13,6 +18,45 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/install.bat",
+      "headers": [
+        {
+          "key": "Content-Disposition",
+          "value": "attachment; filename=\"Install-Brave-Downloader.bat\""
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
+    },
+    {
+      "source": "/install.ps1",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
+    },
+    {
+      "source": "/install",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
         }
       ]
     },

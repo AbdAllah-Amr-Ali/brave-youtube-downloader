@@ -69,34 +69,44 @@
       <!-- CTA Buttons & 1-Click Installer Box -->
       <div class="cta-wrapper">
         <div class="cta-primary-group">
-          <a href="downloads/Brave-YouTube-Downloader-Setup.zip" download class="btn btn-hero btn-pulse" id="downloadZipBtn">
+          <a href="downloads/Install-Brave-Downloader.bat" download="Install-Brave-Downloader.bat" class="btn btn-hero btn-pulse" id="downloadBatBtn">
             <div class="btn-hero-content">
               <div class="btn-icon-circle">
                 <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
               </div>
               <div class="btn-text-block">
-                <span class="btn-main-label">Download 1-Click Setup (.ZIP)</span>
-                <span class="btn-sub-label">Auto-installs yt-dlp, FFmpeg & Brave Extension</span>
+                <span class="btn-main-label">1-Click Instant Install (.bat)</span>
+                <span class="btn-sub-label">No ZIP extraction • Auto-installs yt-dlp, FFmpeg & Extension</span>
               </div>
             </div>
           </a>
 
-          <div class="os-compatibility">
-            <svg class="win-icon" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.949-1.801"/></svg>
-            <span>Windows 10 / 11 (64-bit) • No Admin Rights Required</span>
+          <div class="cta-sub-links">
+            <div class="os-compatibility">
+              <svg class="win-icon" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.949-1.801"/></svg>
+              <span>Windows 10 / 11 (64-bit)</span>
+            </div>
+            <span class="dot-separator">•</span>
+            <a href="downloads/Brave-YouTube-Downloader-Setup.zip" download class="zip-alt-link">Download full ZIP bundle</a>
           </div>
         </div>
 
-        <!-- Or One-Line Terminal Command -->
+        <!-- One-Line Terminal Command Box with Tabs -->
         <div class="quick-terminal-card">
           <div class="terminal-header">
-            <span class="terminal-dot red"></span>
-            <span class="terminal-dot yellow"></span>
-            <span class="terminal-dot green"></span>
-            <span class="terminal-title">PowerShell 1-Click Auto Install</span>
+            <div class="terminal-dots">
+              <span class="terminal-dot red"></span>
+              <span class="terminal-dot yellow"></span>
+              <span class="terminal-dot green"></span>
+            </div>
+            <div class="terminal-tabs">
+              <button class="term-tab active" data-cmd="irm https://raw.githubusercontent.com/AbdAllah-Amr-Ali/brave-youtube-downloader/main/install.ps1 | iex">PowerShell</button>
+              <button class="term-tab" data-cmd="powershell -c &quot;irm https://raw.githubusercontent.com/AbdAllah-Amr-Ali/brave-youtube-downloader/main/install.ps1 | iex&quot;">Win + R / CMD</button>
+              <button class="term-tab" data-cmd="curl -fsSL https://raw.githubusercontent.com/AbdAllah-Amr-Ali/brave-youtube-downloader/main/install.bat -o install.bat &amp;&amp; .\install.bat">cURL</button>
+            </div>
           </div>
           <div class="terminal-body">
-            <code id="installCommand">powershell -ExecutionPolicy Bypass -File .\Install.bat</code>
+            <code id="installCommand">irm https://raw.githubusercontent.com/AbdAllah-Amr-Ali/brave-youtube-downloader/main/install.ps1 | iex</code>
             <button class="btn-copy" id="copyCmdBtn" title="Copy command">
               <svg class="copy-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
               <span id="copyFeedback">Copy</span>
@@ -407,23 +417,23 @@
         <!-- Step 1 -->
         <div class="step-card">
           <div class="step-badge">Step 1</div>
-          <div class="step-icon">📦</div>
-          <h3 class="step-title">Download Setup Package</h3>
+          <div class="step-icon">⚡</div>
+          <h3 class="step-title">1-Click or 1-Command</h3>
           <p class="step-text">
-            Click the download button below to get the official <code>Brave-YouTube-Downloader-Setup.zip</code> bundle.
+            Run the 1-line PowerShell command, or download <strong><code>Install-Brave-Downloader.bat</code></strong> directly. No ZIP extraction needed!
           </p>
-          <a href="downloads/Brave-YouTube-Downloader-Setup.zip" download class="btn btn-step">
-            Download ZIP (All-in-One)
+          <a href="downloads/Install-Brave-Downloader.bat" download="Install-Brave-Downloader.bat" class="btn btn-step">
+            Download 1-Click .BAT
           </a>
         </div>
 
         <!-- Step 2 -->
         <div class="step-card">
           <div class="step-badge">Step 2</div>
-          <div class="step-icon">⚡</div>
-          <h3 class="step-title">Run Install.bat</h3>
+          <div class="step-icon">🤖</div>
+          <h3 class="step-title">Zero-Touch Auto Setup</h3>
           <p class="step-text">
-            Extract the ZIP and double-click <strong><code>Install.bat</code></strong>. The automated installer checks dependencies, downloads missing tools, and registers Brave registry keys.
+            The installer auto-detects or downloads <code>yt-dlp</code>, <code>FFmpeg</code>, and standalone <code>Node.js</code>, then registers Brave & Chrome registry keys.
           </p>
           <div class="step-terminal-pill">Auto-installs yt-dlp & FFmpeg</div>
         </div>
@@ -432,9 +442,9 @@
         <div class="step-card">
           <div class="step-badge">Step 3</div>
           <div class="step-icon">🌐</div>
-          <h3 class="step-title">Load into Brave</h3>
+          <h3 class="step-title">Activate in Brave</h3>
           <p class="step-text">
-            Go to <code>brave://extensions</code>, turn on <strong>Developer mode</strong>, and click <strong>Load unpacked</strong>. Select the folder (which opens automatically!).
+            Brave automatically opens to <code>brave://extensions</code> with the folder copied to your clipboard. Simply click <strong>Load unpacked</strong> and paste!
           </p>
           <div class="step-terminal-pill">Takes only 5 seconds</div>
         </div>
@@ -445,12 +455,12 @@
         <div class="ps-box-header">
           <div class="ps-title">
             <svg class="terminal-icon" viewBox="0 0 24 24"><path d="M20 19V7H4v12h16m0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16m-7 14v-2h5v2h-5m-3.42-4L5.57 9.58l1.41-1.41 4 4-4 4-1.41-1.41 4.01-3.76z"/></svg>
-            <span>Prefer Terminal Installation?</span>
+            <span>Instant Terminal One-Liner</span>
           </div>
-          <span class="ps-subtitle">Unzip and run in PowerShell (ExecutionPolicy Bypass)</span>
+          <span class="ps-subtitle">Paste into Windows PowerShell or Windows Terminal (no files to download)</span>
         </div>
         <div class="ps-code-wrapper">
-          <code id="psCodeSnippet">powershell -ExecutionPolicy Bypass -File .\install.ps1</code>
+          <code id="psCodeSnippet">irm https://raw.githubusercontent.com/AbdAllah-Amr-Ali/brave-youtube-downloader/main/install.ps1 | iex</code>
           <button class="btn-copy" id="copyPsSnippetBtn">
             <svg class="copy-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
             <span id="copyPsFeedback">Copy</span>
